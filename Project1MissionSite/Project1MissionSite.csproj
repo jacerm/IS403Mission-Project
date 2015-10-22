@@ -173,6 +173,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\alaska.png" />
+    <Content Include="Content\images\florida.png" />
+    <Content Include="Content\images\missionary1.jpg" />
+    <Content Include="Content\images\nevada.gif" />
+    <Content Include="Content\images\texas.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -230,6 +235,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Mission.cshtml" />
+    <Content Include="Views\Home\MissionSelection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = ViewBag.MissionTitle;
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Mission", "Home")">Mission Selection</a></li>
+    <li class="active">@ViewBag.MissionTitle</li>
+</ol>
+
+<div class="row">
+    @if (ViewBag.MissionTitle == "Florida Tampa Mission")
+    {
+        <img src="@ViewBag.Logo" class="missionimages pull-right col-sm-5" id="floridaflag" />
+    }
+    else
+    {
+        <img src="@ViewBag.Logo" class="missionimages pull-right col-sm-5" />
+    }
+    <h2 class="col-sm-4 textspacing">@ViewBag.MissionTitle</h2>
+    <h3 class="col-sm-4 textspacing">@ViewBag.MissionPrez</h3>
+    <h4 class="col-sm-4 textspacing">@ViewBag.MissionAddress</h4>
+    <p class="col-sm-4 textspacing">@ViewBag.MissionLanguage</p>
+    <p class="col-sm-4 textspacing">@ViewBag.MissionClimate</p>
+    <p class="col-sm-4 textspacing">@ViewBag.MissionReligion</p>
+    
+</div>
+<a href="@Url.Action("Mission", "Home")" class="btn btn-primary">&laquoGo Back</a>

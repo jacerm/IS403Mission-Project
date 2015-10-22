@@ -22,3 +22,40 @@ select,
 textarea {
     max-width: 280px;
 }
+
+i {
+    display:block;
+}
+
+.textspacing {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.missionimages {
+    height: 300px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+#floridaflag {
+    border: solid 1px black;
+    padding: 0;
+}
+
+.jumboimage {
+    max-width: 25%;
+    min-width: 25%;
+}
+
+#missionselection {
+    margin-bottom: 20px;
+    display: block;
+}
+
+.contactmessage {
+    padding-left:0;
+    padding-top:0;
+    padding-bottom:0.4em;
+    padding-right: 0.4em;
+}

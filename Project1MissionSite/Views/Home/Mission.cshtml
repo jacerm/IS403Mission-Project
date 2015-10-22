@@ -3,5 +3,18 @@
     ViewBag.Title = "Missions";
 }
 
-<h2>Mission</h2>
+<h2>Missions</h2>
+<h4>Select a mission:</h4>
+
+<form action="/Home/MissionSelection" method="get">
+    <fieldset>
+        <select id="missionselection" name="missions">
+            <option value="0">Texas Lubbock Mission</option>
+            <option value="1">Nevada Las Vegas Mission</option>
+            <option value="2">Florida Tampa Mission</option>
+            <option value="3">Alaska Anchorage Mission</option>
+        </select>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </fieldset>
+</form>
 

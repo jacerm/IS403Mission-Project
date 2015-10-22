@@ -1,17 +1,28 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2 class="textspacing" style="margin-top: 20px;">@ViewBag.Title</h2>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
+<address class="textspacing">
+    Tanner Building<br>
+    Provo, UT 84602<br>
+    (801)555-1234
 </address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<form>
+    <p>First name: </p><input type="text" name="FirstName" placeholder="First name here..." class="textspacing"><br>
+    <p>Last name: </p><input type="text" name="LastName" placeholder="Last name here..." class="textspacing"><br>
+    <p>Email: </p><input type="text" name="Email" placeholder="Email here..." class="textspacing"/><br />
+    <p>Subject:</p>
+    <fieldset class="textspacing">
+        <select id="contactselection" name="subjects">
+            <option value="0">Support</option>
+            <option value="1">Suggestions</option>
+            <option value="2">Testimonials</option>
+        </select>
+    </fieldset>
+    <p>Message: </p><input type="text" name="Message" placeholder="Message here..." class="textspacing contactmessage" /><br />
+    <input type="submit" value="Submit" class="btn btn-primary textspacing">
+</form>
+
+<strong>Support: </strong><a href="mailto:mission.development@missiondev.com">mission.development@missiondev.com</a>

@@ -18,6 +18,12 @@ namespace Project1MissionSite
 				url: "{controller}/{action}/{id}",
 				defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
 			);
+
+            routes.MapRoute(
+                name: "Mission",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Mission", id = UrlParameter.Optional }
+            );
 		}
 	}
 }
