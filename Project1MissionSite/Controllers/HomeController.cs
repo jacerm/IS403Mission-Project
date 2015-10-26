@@ -30,6 +30,10 @@ namespace Project1MissionSite.Controllers
 
         public ActionResult MissionSelection(int missions)
         {
+			if (missions == null) 
+			{
+				missions = 0;
+			}
             if (missions == 0)
             {
                 ViewBag.MissionTitle = "Texas Lubbock Mission";

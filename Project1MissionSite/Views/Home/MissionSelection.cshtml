@@ -23,6 +23,12 @@
     <p class="col-sm-4 textspacing">@ViewBag.MissionLanguage</p>
     <p class="col-sm-4 textspacing">@ViewBag.MissionClimate</p>
     <p class="col-sm-4 textspacing">@ViewBag.MissionReligion</p>
+
+	<form method="POST" class="col-sm-4">
+		<p>New Questions: </p><input type="text" name="FirstName" placeholder="Question here..." class="textspacing"><br>
+		<p>New Answer: </p><input type="text" name="LastName" placeholder="Answer here..." class="textspacing"><br>
+		<input type="submit" value="Submit" class="btn btn-primary textspacing">
+	</form>
     
 </div>
-<a href="@Url.Action("Mission", "Home")" class="btn btn-primary">&laquoGo Back</a>
+@*<a href="@Url.Action("Mission", "Home")" class="btn btn-primary">&laquoGo Back</a>*@
