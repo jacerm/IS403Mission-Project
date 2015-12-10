@@ -1,4 +1,6 @@
-﻿
+﻿@model IEnumerable<Project1MissionSite.Models.Data>
+@using Microsoft.AspNet.Identity;
+
 @{
     ViewBag.Title = ViewBag.MissionTitle;
 }
@@ -6,86 +8,43 @@
 <ol class="breadcrumb">
 	<li><a href="@Url.Action("Index", "Home")">Home</a></li>
     <li><a href="@Url.Action("Mission", "Home")">Mission Selection</a></li>
-    <li class="active">@ViewBag.MissionTitle</li>
+    <li class="active">@Model.First().missionName</li>
 </ol>
 
 <div class="row">
-    @if (ViewBag.MissionTitle == "Florida Tampa Mission")
-    {
-        <img src="@ViewBag.Logo" class="missionimages pull-right col-sm-5" id="floridaflag" />
-    }
-    else
-    {
-        <img src="@ViewBag.Logo" class="missionimages pull-right col-sm-5" />
-    }
-    <h2 class="col-sm-4">@ViewBag.MissionTitle</h2>
-    <h3 class="col-sm-4">@ViewBag.MissionPrez</h3>
-    <h4 class="col-sm-4">@ViewBag.MissionAddress</h4>
-    <p class="col-sm-4"><strong>Mission Languages: </strong>@ViewBag.MissionLanguage</p>
-    <p class="col-sm-4"><strong>Mission Climate: </strong>@ViewBag.MissionClimate</p>
-    <p class="col-sm-4"><strong>Mission Religions: </strong>@ViewBag.MissionReligion</p>
-</div>
-
-<div class="row text-center">
-	<h2>FAQ</h2>
+    <img src="@Model.First().missionFlag" class="missionimages pull-right col-sm-5"/>
+    <h2 class="col-sm-4">@Model.First().missionName</h2>
+    <h3 class="col-sm-4">President @Model.First().missionPresidentFirst @Model.First().missionPresidentLast</h3>
+    <h4 class="col-sm-4">@Model.First().missionAddress @Model.First().missionCity @Model.First().missionState @Model.First().missionZip</h4>
+    <p class="col-sm-4"><strong>Mission Languages: </strong>@Model.First().missionLanguage</p>
+    <p class="col-sm-4"><strong>Mission Climate: </strong>@Model.First().missionClimate</p>
+    <p class="col-sm-4"><strong>Mission Religions: </strong>@Model.First().missionReligion</p>
 </div>
 
 <div class="row">
-	<div class="accordion" id="accordion2">
-		<div class="accordion-group textspacing col-sm-12">
-			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-					How many missionaries are there currently?
-				</a>
+	<h2 class="col-sm-4">FAQ</h2>
+</div>
+
+@{int i = 0;}
+@foreach (var item in Model)
+{
+	<div style="margin-top: 15px;" class="panel-group" id="accordion_@i">
+		<div class="panel panel-default" id="panel_@i">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne_@i">@Html.DisplayFor(modelitem => item.missionquestionQuestion)</a>
+				</h4>
 			</div>
-			<div id="collapseOne" class="accordion-body collapse">
-				<div class="accordion-inner textspacing">
-					With the age change there has been an increase in missionary service. Our mission has seen the benfits and has jumped to approximately 150 missionaries.
+			<div id="collapseOne_@i" class="panel-collapse collapse ">
+				<div class="panel-body">
+					<h4><strong>Answer: </strong>@Html.DisplayFor(modelitem => item.missionquestionAnswer)</h4>
+					<a href="@Url.Action("Edit", "MissionQuestions", new { id = @Html.DisplayFor(modelitem => item.missionquestionId) })" class="btn btn-primary">Reply to Question</a>
+					<h4 style="margin-top: 10px;">Contributed By: @Html.DisplayFor(modelitem => item.userEmail)</h4>
 				</div>
-				<form method="POST">
-					<p>Reply: </p><input type="text" name="QuestionReply" placeholder="Your Answer..." class="textspacing"><br />
-					<input type="submit" value="Submit" class="btn btn-primary textspacing">
-				</form>
-			</div>
-		</div>
-		<div class="accordion-group textspacing col-sm-12">
-			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-					How many baptisms can each missionary expect
-				</a>
-			</div>
-			<div id="collapseTwo" class="accordion-body collapse">
-				<div class="accordion-inner textspacing">
-					Average baptisms per missionary is about 12.
-				</div>
-				<form method="POST">
-					<p>Reply: </p><input type="text" name="QuestionReply" placeholder="Your Answer..." class="textspacing"><br />
-					<input type="submit" value="Submit" class="btn btn-primary textspacing">
-				</form>
-			</div>
-		</div>
-		<div class="accordion-group textspacing col-sm-12">
-			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">
-					Is the mission dangerous?
-				</a>
-			</div>
-			<div id="collapseThree" class="accordion-body collapse">
-				<div class="accordion-inner textspacing">
-					Overall, the area in which you will serve is safe. You will need to avoid certain areas, but you should not be overally concerned with your safety.
-				</div>
-				<form method="POST">
-					<p>Reply: </p><input type="text" name="QuestionReply" placeholder="Your Answer..." class="textspacing"><br />
-					<input type="submit" value="Submit" class="btn btn-primary textspacing">
-				</form>
 			</div>
 		</div>
 	</div>
-	<h2 class="col-sm-12">Post a New Question</h2>
-	<form method="POST" class="col-sm-4">
-		<p>New Questions: </p><input type="text" name="FirstName" placeholder="Question here..." class="textspacing"><br>
-		<p>New Answer: </p><input type="text" name="LastName" placeholder="Answer here..." class="textspacing"><br>
-		<input type="submit" value="Submit" class="btn btn-primary textspacing">
-	</form>
-</div>
-@*<a href="@Url.Action("Mission", "Home")" class="btn btn-primary">&laquoGo Back</a>*@
+	i++;
+}
+
+<a href="@Url.Action("Create", "MissionQuestions", new { missions = @ViewBag.missions })" class="btn btn-primary" style="margin-top: 15px;">Add New Question</a>

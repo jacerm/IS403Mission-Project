@@ -1,0 +1,42 @@
+﻿@model Project1MissionSite.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.userPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userFirst)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userFirst)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userLast)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userLast)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.userEmail }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,13 +1,18 @@
-﻿using System;
+﻿using Project1MissionSite.DAL;
+using Project1MissionSite.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Project1MissionSite.Controllers
 {
 	public class HomeController : Controller
 	{
+		private MissionSiteContext db = new MissionSiteContext();
+
 		public ActionResult Index()
 		{
 			return View();
@@ -23,59 +28,70 @@ namespace Project1MissionSite.Controllers
 			return View();
 		}
 		
+		[Authorize]
 		public ActionResult Mission()
 		{
-            return View();
+			return View(db.Missions.ToList());
 		}
 
+		public ActionResult Login()
+		{
+			return View();
+		}
+
+		//Action method for custome Login to check an email against the user table
+		[HttpPost]
+		public ActionResult Login(FormCollection form, bool rememberMe = false)
+		{
+			String email = form["Email"].ToString();
+			String password = form["Password"].ToString();
+
+			var currentUser = db.Users.Find(email);
+			//if the user does not exist it sends to a creation error page
+			if (currentUser == null) 
+			{
+				return Redirect("~/Home/Error");
+			}
+			//if the email or password is incorrect it will send you to the incorrect information error page
+			if (!(currentUser.userEmail == email) || !(currentUser.userPassword == password))
+			{
+				return Redirect("~/Home/Error1");
+			}
+			else 
+			{
+				FormsAuthentication.SetAuthCookie(email, rememberMe);
+
+				return RedirectToAction("Index", "Home");
+
+			}
+		}
+
+		public ActionResult Error()
+		{
+			return View();
+		}
+
+		public ActionResult Error1() 
+		{
+			return View();
+		}
+
+		//sql executable that joins missionquestion and mission together to give the one view access to all needed info
+		[Authorize]
         public ActionResult MissionSelection(int missions)
         {
-			if (missions == null) 
-			{
-				missions = 0;
-			}
-            if (missions == 0)
-            {
-                ViewBag.MissionTitle = "Texas Lubbock Mission";
-                ViewBag.MissionPrez = "President David Shayne Heap";
-                ViewBag.MissionAddress = "6310 114th St, Lubbock, TX 79424";
-                ViewBag.MissionLanguage = "English and Spanish";
-                ViewBag.MissionClimate = "Hot and Dry";
-                ViewBag.MissionReligion = "Baptist";
-                ViewBag.Logo = "/Content/images/texas.jpg";
-            }
-            else if (missions == 1)
-            {
-                ViewBag.MissionTitle = "Nevada Las Vegas West Mission";
-                ViewBag.MissionPrez = "President Michael Brown Ahlander";
-                ViewBag.MissionAddress = "4455 Allen Lane, Ste: 140, North Las Vegas, NV 89031";
-                ViewBag.MissionLanguage = "English, Spanish and Mandarin Chinese";
-                ViewBag.MissionClimate = "Hot and Dry";
-                ViewBag.MissionReligion = "Catholic";
-                ViewBag.Logo = "/Content/images/nevada.gif";
-            }
-            else if (missions == 2)
-            {
-                ViewBag.MissionTitle = "Florida Tampa Mission";
-                ViewBag.MissionPrez = "President Mark D.Cusick";
-                ViewBag.MissionAddress = "13153 N. Dale Mabry Highway Ste: 109 Tampa, FL 33618";
-                ViewBag.MissionLanguage = "English, Spanish and French";
-                ViewBag.MissionClimate = "Hot and Humid";
-                ViewBag.MissionReligion = "Catholic";
-                ViewBag.Logo = "/Content/images/florida.png";
-            }
-            else if (missions == 3)
-            {
-                ViewBag.MissionTitle = "Alaska Anchorage Mission";
-                ViewBag.MissionPrez = "President Eldon Ray Robinson";
-                ViewBag.MissionAddress = "3250 Strawberry Road Anchorage, AK 99502";
-                ViewBag.MissionLanguage = "English";
-                ViewBag.MissionClimate = "Freezing Cold";
-                ViewBag.MissionReligion = "Catholic and Other Christians";
-                ViewBag.Logo = "/Content/images/alaska.png";
-            }
+			ViewBag.missions = missions;
+			IEnumerable<Data> data =
 
-            return View();
+				db.Database.SqlQuery<Data>(
+
+			"Select * " +
+
+			"FROM missionquestion JOIN mission ON missionquestion.missionId = mission.missionId " +
+
+			"WHERE missionquestion.missionId = " + missions);
+
+			return View(data);
         }
 	}
 }

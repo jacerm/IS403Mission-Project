@@ -1,11 +1,11 @@
-﻿
+﻿@model IEnumerable<Project1MissionSite.Models.Mission>
 @{
     ViewBag.Title = "Missions";
 }
 
 <ol class="breadcrumb">
 	<li><a href="@Url.Action("Index", "Home")">Home</a></li>
-	<li class="active">Mission Selection</a></li>
+	<li class="active">Mission Selection</li>
 </ol>
 
 <h2>Missions</h2>
@@ -13,11 +13,11 @@
 
 <form action="/Home/MissionSelection" method="get">
     <fieldset>
-        <select id="missionselection" name="missions">
-            <option value="0">Texas Lubbock Mission</option>
-            <option value="1">Nevada Las Vegas Mission</option>
-            <option value="2">Florida Tampa Mission</option>
-            <option value="3">Alaska Anchorage Mission</option>
+        <select style="color: black;"id="missionselection" name="missions">
+			@foreach (var item in Model)
+			{ 
+				<option style="color: black;"value="@item.missionId">@item.missionName</option>
+			}
         </select>
         <input type="submit" value="Submit" class="btn btn-primary" />
     </fieldset>

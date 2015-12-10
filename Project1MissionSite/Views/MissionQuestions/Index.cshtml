@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Project1MissionSite.Models.MissionQuestion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.missionquestionQuestion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.missionquestionAnswer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.missionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userEmail)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.missionquestionQuestion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.missionquestionAnswer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.missionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userEmail)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.missionquestionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.missionquestionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.missionquestionId })
+        </td>
+    </tr>
+}
+
+</table>

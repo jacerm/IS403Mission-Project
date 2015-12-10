@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Project1MissionSite.Models;
+using System.Web.Security;
 
 namespace Project1MissionSite.Controllers
 {
@@ -394,7 +395,8 @@ namespace Project1MissionSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
+			Session.Abandon();
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
