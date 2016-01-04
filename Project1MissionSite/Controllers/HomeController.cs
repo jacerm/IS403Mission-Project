@@ -2,10 +2,12 @@
 using Project1MissionSite.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Microsoft.AspNet.Identity;
 
 namespace Project1MissionSite.Controllers
 {
@@ -64,6 +66,21 @@ namespace Project1MissionSite.Controllers
 				return RedirectToAction("Index", "Home");
 
 			}
+		}
+
+		[HttpPost]
+		public ActionResult NewAnswer(FormCollection form, int? id)
+		{
+			String newanswer = form["NewAnswer"].ToString();
+
+			var currentQuestion = db.MissionQuestions.Find(id);
+			currentQuestion.missionquestionAnswer = newanswer;
+			currentQuestion.userEmail = User.Identity.GetUserName().ToString();
+			//var currentuser = db.Users.Find(User.Identity.GetUserId());
+			//currentQuestion.userEmail = currentuser.userEmail;
+			db.SaveChanges();
+
+			return RedirectToAction("MissionSelection", "Home", new { missions = currentQuestion.missionId});
 		}
 
 		public ActionResult Error()

@@ -38,6 +38,20 @@
 			<div id="collapseOne_@i" class="panel-collapse collapse ">
 				<div class="panel-body">
 					<h4><strong>Answer: </strong>@Html.DisplayFor(modelitem => item.missionquestionAnswer)</h4>
+					@using (Html.BeginForm("NewAnswer", "Home", new { id = @Html.DisplayFor(modelitem => item.missionquestionId) }, FormMethod.Post, null))
+					{
+						[ValidateAntiForgeryToken]
+						<div class="form-horizontal">
+							<hr />
+							<label for="inputAnswer" class="control-label col-md-2" style="margin-top: 15px;">Reply: </label>
+							<div class="col-md-10" style="margin-top: 15px;">
+								@Html.TextArea("NewAnswer", null, 5, 50, new { @class = "form-control" })
+							</div>
+							<div class="col-md-offset-2 col-md-10" style="margin-top: 15px;">
+								<button type="submit" class="btn btn-primary">Post New Answer</button>
+							</div>
+						</div>
+					}
 					<a href="@Url.Action("Edit", "MissionQuestions", new { id = @Html.DisplayFor(modelitem => item.missionquestionId) })" class="btn btn-primary">Reply to Question</a>
 					<h4 style="margin-top: 10px;">Contributed By: @Html.DisplayFor(modelitem => item.userEmail)</h4>
 				</div>

@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5 {
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
 }
 
 i {
